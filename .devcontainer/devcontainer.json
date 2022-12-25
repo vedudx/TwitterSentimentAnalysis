@@ -1,40 +1,41 @@
 {
-	"name": "DSResearch",
-	"build": {
-		"dockerfile": "Dockerfile"
-	},
-	"overrideCommand": false,
-	
-	// Forward Jupyter port locally, mark required
-	"forwardPorts": [8888],
-	"portsAttributes": {
-		"8888": {
-			"label": "Jupyter",
-			"requireLocalPort": true,
-			"onAutoForward": "ignore"
-		}
-	},
+  "name": "DSResearch",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "overrideCommand": false,
 
-	// Configure tool-specific properties.
-	"customizations": {
-		// Configure properties specific to VS Code.
-		"vscode": {
-			// Set *default* container specific settings.json values on container create.
-			"settings": { 
-				"python.defaultInterpreterPath": "/opt/conda/bin/python"
-			},
-			
-			// Add the IDs of extensions you want installed when the container is created.
-			"extensions": [
-				"ms-python.python"
-			]
-		}
-	},
+  // Forward Jupyter port locally, mark required
+  "forwardPorts": [8888],
+  "portsAttributes": {
+    "8888": {
+      "label": "Jupyter",
+      "requireLocalPort": true,
+      "onAutoForward": "ignore"
+    }
+  },
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "pip3 install --user -r requirements.txt",
-    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/bin/python"
+      },
 
-	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "jovyan"
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": ["ms-python.python"]
+    }
+  },
+
+  // install git LFS (apt installs are in the Dockerfile)
+  // a very hacky fix for https://github.com/microsoft/vscode-remote-release/issues/7589!
+  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && git lfs install",
+
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  }
 }
