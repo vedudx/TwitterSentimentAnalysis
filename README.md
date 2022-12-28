@@ -19,3 +19,9 @@ All our raw data in `data/` is stored using Git LFS, so they are not downloaded 
 ```bash
 git lfs pull
 ```
+
+## Cleaning the Data
+
+Once you have the required data files, run 'CleaningData.ipynb' to get modified data which is necessary to run tweetAnalysis ipython notebook
+
+
