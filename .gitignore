@@ -1,3 +1,4 @@
 .DS_Store
 data
 workspace.code-workspace
+**/.ipynb_checkpoints
