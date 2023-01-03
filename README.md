@@ -1,4 +1,4 @@
-# DSResearch
+# Sentiment Analysis on hashtags related to CoronaVirus
 
 ## Getting Started
 
